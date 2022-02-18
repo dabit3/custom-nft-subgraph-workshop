@@ -2,6 +2,8 @@
 
 In this workshop we'll build a subgraph for querying NTF data from the [Cryptocoven](https://etherscan.io/address/0x5180db8F5c931aaE63c74266b211F580155ecac8#code) smart contract, implementing queries for fetching NFTs as well as their owners, building relationships between them, full text search, sorting, and filtering.
 
+> The codebase for this project is located [here](https://github.com/dabit3/cryptocoven-api)
+
 ### Prerequisites
 
 To be successful in this tutorial, you should have [Node.js](https://nodejs.org/en/) installed on your machine. These days, I recommend using either [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm/blob/master/docs/commands.md) to manage Node.js versions.

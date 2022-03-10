@@ -221,7 +221,6 @@ export function handleTransfer(event: TransferEvent): void {
     /* if the token does not yet exist, create it */
     token = new Token(event.params.tokenId.toString());
     token.tokenID = event.params.tokenId;
-    token.updatedAtTimestamp = event.block.timestamp;
  
     token.tokenURI = "/" + event.params.tokenId.toString() + ".json";
 
@@ -269,6 +268,7 @@ export function handleTransfer(event: TransferEvent): void {
       }
     }
   }
+  token.updatedAtTimestamp = event.block.timestamp;
 
   /* set or update the owner field and save the token to the Graph Node */
   token.owner = event.params.to.toHexString();

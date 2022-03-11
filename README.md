@@ -100,13 +100,13 @@ To populate the entities, we'll be fetching metadata from IPFS using the token I
 For example, the base URI for cryptocoven is:
 
 ```
-ipfs://QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB
+ipfs://QmSr3vdMuP2fSxWD7S26KzzBWcAN1eNhm4hk1qaR3x3vmj
 ```
 
 Therefore, we can visit a URI like:
 
 ```
-https://ipfs.io/ipfs/QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB/234.json
+https://ipfs.io/ipfs/QmSr3vdMuP2fSxWD7S26KzzBWcAN1eNhm4hk1qaR3x3vmj/234.json
 ```
 
 and see all of the metadata for the token.
@@ -202,30 +202,29 @@ This is especially useful for NFT metadata where you might have additional infor
 Update the file with the following code:
 
 ```typescript
+import { ipfs, json } from '@graphprotocol/graph-ts'
 import {
   Transfer as TransferEvent,
   Token as TokenContract
 } from '../generated/Token/Token'
-import { ipfs, json } from '@graphprotocol/graph-ts'
-
 import {
 Token, User
 } from '../generated/schema'
 
-const ipfshash = "QmZHKZDavkvNfA9gSAg7HALv8jF7BJaKjUc9U2LSuvUySB"
+const ipfshash = "QmSr3vdMuP2fSxWD7S26KzzBWcAN1eNhm4hk1qaR3x3vmj"
 
 export function handleTransfer(event: TransferEvent): void {
   /* load the token from the existing Graph Node */
-  let token = Token.load(event.params.tokenId.toString());
+  let token = Token.load(event.params.tokenId.toString())
   if (!token) {
     /* if the token does not yet exist, create it */
-    token = new Token(event.params.tokenId.toString());
-    token.tokenID = event.params.tokenId;
+    token = new Token(event.params.tokenId.toString())
+    token.tokenID = event.params.tokenId
  
-    token.tokenURI = "/" + event.params.tokenId.toString() + ".json";
+    token.tokenURI = "/" + event.params.tokenId.toString() + ".json"
 
     /* combine the ipfs hash and the token ID to fetch the token metadata from IPFS */
-    let metadata = ipfs.cat(ipfshash + token.tokenURI);
+    let metadata = ipfs.cat(ipfshash + token.tokenURI)
     if (metadata) {
       const value = json.fromBytes(metadata).toObject()
       if (value) {
@@ -268,17 +267,17 @@ export function handleTransfer(event: TransferEvent): void {
       }
     }
   }
-  token.updatedAtTimestamp = event.block.timestamp;
+  token.updatedAtTimestamp = event.block.timestamp
 
   /* set or update the owner field and save the token to the Graph Node */
-  token.owner = event.params.to.toHexString();
-  token.save();
+  token.owner = event.params.to.toHexString()
+  token.save()
   
   /* if the user does not yet exist, create them */
-  let user = User.load(event.params.to.toHexString());
+  let user = User.load(event.params.to.toHexString())
   if (!user) {
-    user = new User(event.params.to.toHexString());
-    user.save();
+    user = new User(event.params.to.toHexString())
+    user.save()
   }
  }
 ```

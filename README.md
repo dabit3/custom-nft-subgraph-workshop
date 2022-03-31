@@ -58,8 +58,8 @@ $ graph init --from-contract <CONTRACT_ADDRESS> \
 In our case we'll be starting with the [Cryptocoven NFT contract](https://etherscan.io/address/0x5180db8F5c931aaE63c74266b211F580155ecac8#code) so we can initialize from that contract address by passing in the contract address using the `--from-contract` flag:
 
 ```sh
-$ graph init --from-contract 0x5180db8F5c931aaE63c74266b211F580155ecac8 --network mainnet  \
---contract-name Token --index-events
+$ graph init --from-contract 0x5180db8F5c931aaE63c74266b211F580155ecac8 --protocol ethereum \
+--network mainnet --contract-name Token --index-events
 
 ? Product for which to initialize › hosted-service
 ? Subgraph name › your-username/cryptocovenapi

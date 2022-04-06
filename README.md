@@ -303,7 +303,9 @@ To deploy, we can run the `deploy` command using the Graph CLI. To deploy, you w
 Next, run the following command:
 
 ```sh
-$ graph auth https://api.thegraph.com/deploy/ <ACCESS_TOKEN>
+$ graph auth
+✔ Product for which to initialize · hosted-service
+✔ Deploy key · ********************************
 
 $ yarn deploy
 ```

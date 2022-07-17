@@ -191,6 +191,17 @@ source:
   startBlock: 13547115
 ```
 
+If the spec version for the subgraph.yaml file is 0.0.4 then, the feature `fullTextSearch, ipfsOnEthereumContracts` has to be declared in the manifest as a top level, like specVersion or schema.
+So, create a new key called features in the yaml file at the top level and declare these features as mentionsed below. 
+For full reference: https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md 
+Thanks [drgorilla-eth](https://ethereum.stackexchange.com/users/68134/drgorilla-eth) for pointing it out.
+
+```yaml
+features:
+  - fullTextSearch
+  - ipfsOnEthereumContracts
+```
+
 ## Assemblyscript mappings
 
 Next, open __src/mappings.ts__ to write the mappings that we defined in our subgraph subgraph `eventHandlers`.
